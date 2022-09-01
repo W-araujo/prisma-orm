@@ -1,4 +1,4 @@
-import { IUserMethods } from '../types/user';
+import { IUserMethods } from '../@types/user';
 import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -29,7 +29,11 @@ class UserService implements IUserMethods {
   }
 
   async listAll(): Promise<User[]> {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      include: {
+        events: true,
+      },
+    });
     return users;
   }
 }
