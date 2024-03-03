@@ -23,7 +23,9 @@ class UserController {
 
     async listAll(req: Request, res: Response) {
         try {
-            const listAll = await userService.listAll()
+            const page = req.query.page
+            const pageSize = req.query.pageSize
+            const listAll = await userService.listAll(Number(page), Number(pageSize))
             return res.status(200).json(listAll)
         } catch (error) {
             console.log(error)

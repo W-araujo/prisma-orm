@@ -8,5 +8,5 @@ export interface IUserMethods {
     address: string,
     urlImage: string,
   ): Promise<User>;
-  listAll(): Promise<User[]>;
+  listAll(page: number, pageSize: number): Promise<User[]>;
 }
