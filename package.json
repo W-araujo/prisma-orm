@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev src/server.ts",
-    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:migrate": "npx prisma migrate dev --schema=./src/prisma/schema.prisma",
     "prisma:generate": "npx prisma generate --schema=./src/prisma/schema.prisma"
   },
   "author": "Wesley Araujo",

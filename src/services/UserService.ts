@@ -6,15 +6,9 @@ const prisma = new PrismaClient();
 prisma.$connect();
 
 class UserService implements IUserMethods {
-  async create(
-    name: string,
-    email: string,
-    birthday: Date,
-    address: string,
-    urlImage: string,
-  ): Promise<User> {
+  async create(name: string, email: string, birthday: Date, address: string, urlImage: string): Promise<User> {
     if (!email) throw new Error('Please enter a valid email');
-
+    
     const user = await prisma.user.create({
       data: {
         name,

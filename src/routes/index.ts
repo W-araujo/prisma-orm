@@ -7,4 +7,4 @@ const routes = Router();
 routes.use('/user', userRouter);
 routes.use('/events', eventsRouter);
 
-export default routes;
+export { routes };
