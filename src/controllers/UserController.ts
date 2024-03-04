@@ -1,11 +1,14 @@
 import { Request, Response } from 'express'
 import { UserService } from '../services/UserService'
 import { User } from '@prisma/client';
+import { connectPrisma, disconnectPrisma } from '../prisma/utils/connectDisconnect';
 const userService = new UserService()
 
 class UserController {
     async create(req: Request, res: Response) {
         try {
+            await connectPrisma()
+
             const data: User = req.body
             const user = await userService.create(
                 data.name,
@@ -18,6 +21,8 @@ class UserController {
         } catch (error) {
             console.log(error)
             return res.status(404).json({ error: "Something went wrong!" });
+        } finally {
+            await disconnectPrisma()
         }
     }
 

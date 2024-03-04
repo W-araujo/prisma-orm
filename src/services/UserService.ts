@@ -1,14 +1,9 @@
 import { IUserMethods } from '../@types/user';
-import { PrismaClient, User } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
-prisma.$connect();
+import { User } from '@prisma/client';
+import { prisma } from '../prisma/utils/client'
 
 class UserService implements IUserMethods {
   async create(name: string, email: string, birthday: Date, address: string, urlImage: string): Promise<User> {
-    if (!email) throw new Error('Please enter a valid email');
-
     const user = await prisma.user.create({
       data: {
         name,
@@ -38,5 +33,3 @@ class UserService implements IUserMethods {
 }
 
 export { UserService };
-
-prisma.$disconnect();
