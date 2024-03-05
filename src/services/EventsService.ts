@@ -1,21 +1,9 @@
 import { IEventsMethods } from '../@types/events';
-import { PrismaClient, Events } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
-prisma.$connect();
+import { Events } from '@prisma/client';
+import { prisma } from '../prisma/utils/client'
 
 class EventsService implements IEventsMethods {
-  async create(
-    title: string,
-    description: string,
-    initialDate: Date,
-    finalDate: Date,
-    userId: number,
-    value: number,
-  ): Promise<Events> {
-    if (!title) throw new Error('Please enter a title');
-
+  async create(title: string, description: string, initialDate: Date, finalDate: Date, userId: number, value: number): Promise<Events> {
     const event = await prisma.events.create({
       data: {
         title,
